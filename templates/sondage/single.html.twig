@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <h1 class="text-center my-3">
+        Merci de répondre à ce sondage
+    </h1>
+    <div id="sondage" class="border border-1 border-dark rounded">
+        {% for question in sondage.questions %}
+            <div>
+                <p class="h3">{{question.question}}</p>
+                <ul class="list-group">
+                    {% for reponse in question.reponses %}
+                    {% if reponse.id in reponseIds %}
+                    {% set maxClass = 'fw-bold text-success' %}
+                    {% else %}
+                        {% set maxClass = '' %}
+                    {% endif %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="{{maxClass}}">{{reponse.answer}}</span>
+                            <div>
+                                <span class="{{maxClass}}">{{reponse.vote}} vote(s)</span>
+                                <span><a href={{path('update_vote', {sondage: sondage.id, reponse: reponse.id})}}><i class="fas fa-thumbs-up text-success h3"></i></a></span>
+                            </div>
+                        </li>
+                    {% else %}
+                        <h2 class="text-danger">Cette question n'a pas de réponses associées</h2>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <h2 class="text-danger">Ce sondage est vide</h2>
+        {% endfor %}
+    </div>
+{% endblock %}

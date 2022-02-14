@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReponseController!{% endblock %}
+
+{% block body %}
+    <h1 class="my-3">Liste des réponses</h1>
+    <div class="my-3">
+        <a href={{ path('reponse_add')}}><button class="btn btn-info">Ajouter une réponse</button></a>
+    </div>
+    <ul class="list-group">
+        {% for reponse in reponseList %}
+            <li class="list-group-item"><a href={{path('reponse_update', {id: reponse.id})}}>{{reponse.answer}}</a> | {{reponse.vote}} vote(s)</li>
+        {% else %}
+            <h2 class="text-danger">Aucune réponse trouvée</h2>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="text-center my-3">
+    <h1>Sondages en folie</h1>
+    <p>Bienvenue sur notre super site de sondage!</p>
+    <p>Retrouvez tous nos sondages et les résultats associés. On compte sur vous pour nous donner votre avis!</p>
+
+    <div class="text-start my-3 row">
+    <div class="col-4 mx-auto">
+        <img src="https://fakeimg.pl/250x150">
+    </div>
+    <div class="col-6 mx-auto">
+        <p class="text-info">N'hésitez pas à proposer votre propre sondage</p>
+        <a href={{ path('sondage_add') }}><button class="btn btn-info">Ajouter un sondage</button></a>
+    </div>
+    </div>
+</div>
+<hr>
+<div class="d-flex flex-wrap justify-content-around my-3">
+    {% for sondage in sondageList %}
+        <div class="card" style="width: 18rem;">
+            <img src="https://fakeimg.pl/100x100?text={{sondage.title}}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{sondage.title}}</h5>
+                <a href={{path('sondage_single', {id:sondage.id})}} class="btn btn-primary">Voir le sondage</a>
+            </div>
+        </div>
+    {% else %}
+        <h2 class="text-danger">Il n'y a pas de sondage pour le moment.</h2>
+    {% endfor %}
+</div>
+{% endblock %}

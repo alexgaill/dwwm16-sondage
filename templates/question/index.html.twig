@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center my-3">Liste des questions</h1>
+    <div class="my-3">
+        <a href={{ path('question_add')}}><button class="btn btn-info">Ajouter une question</button></a>
+    </div>
+    <ul class="list-group">
+        {% for question in questionList %}
+            <li class="list-group-item"><a href={{path('question_update', {id:question.id})}}>{{question.question}}</a> <span>| {{question.sondage.title}}</span></li>
+        {% else %}
+            <h2 class="text-danger">Il n'y a pas de questions pour le moment</h2>
+        {% endfor %}
+    </ul>
+{% endblock %}
